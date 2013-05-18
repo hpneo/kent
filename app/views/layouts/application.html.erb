@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kent</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600' rel='stylesheet' type='text/css' />
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header id="header">
+    <h1 class="float">
+      <a href="/">Kent</a>
+    </h1>
+    <nav class="float right">
+      <div class="dropdown">
+        <a href="#" class="button green dropdown-toggle">Sign in with...</a>
+        <ul class="dropdown-menu">
+          <li><a href="/auth/twitter">Twitter</a></li>
+          <li><a href="/auth/facebook">Facebook</a></li>
+          <li><a href="/auth/gplus">Google+</a></li>
+        </ul>
+      </div>
+      <a href="#" class="button blue">Subscribe</a>
+      <a href="#" class="button red">Sign out</a>
+    </nav>
+  </header>
+  <section id="main">
+    <aside id="feeds">
+      <h4>Feeds</h4>
+      <h4>Folders</h4>
+      <h4>Tags</h4>
+    </aside>
+    <aside id="reader">
+      <%= yield %>
+    </aside>
+  </section>
+</body>
+</html>
