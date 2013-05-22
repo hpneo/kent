@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .button {
   border: solid 1px #e0e0e0;
-  padding: 5px 15px;
+  padding: 5px 20px;
   border-radius: 2px;
   margin: 0 5px;
   font-weight: 900;
@@ -44,39 +44,53 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.button.green {
-  border-color: #388e3e;
-  background: #41a448;
-  color: #fff;
+.button-group {
+  display: inline-block;
+  border: solid 1px #e0e0e0;
+  border-radius: 2px;
+  margin: 0 5px;
+  font-weight: 900;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 1.1em;
+  background: #efefef;
+  line-height: 25px;
 
-  &:hover {
-    background: #3b9541;
+  .label, .buttons {
+    display: inline-block;
   }
-}
 
-.button.blue {
-  border-color: #4172a4;
-  background: #4c82b7;
-  color: #fff;
-
-  &:hover {
-    background: #4477aa;
+  .label {
+    padding: 5px 15px;
+    white-space: nowrap;
+    vertical-align: middle;
   }
-}
 
-.button.red {
-  border-color: #8d2525;
-  background: #b43131;
-  color: #fff;
+  .buttons {
+    font-size: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
 
-  &:hover {
-    background: #a42c2c;
+  a {
+    display: inline-block;
+    padding: 5px 5px;
+  }
+
+  img {
+    vertical-align: middle;
   }
 }
 
 .dropdown {
   display: inline-block;
   position: relative;
+
+  .dropdown-toggle {
+    img {
+      vertical-align: middle;
+    }
+  }
 
   .dropdown-menu {
     background: #fcfcfc;
@@ -91,20 +105,56 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     z-index: 1000;
     float: left;
-    min-width: 160px;
+    min-width: 140px;
+    font-size: 13px;
 
     li {
       margin: 0;
-      padding: 0;
-    }
-
-    a {
-      display: block;
-      padding: 10px;
+      padding: 5px;
 
       &:hover {
         background: #eee;
       }
     }
+
+    a {
+      display: block;
+      padding: 5px 10px;
+      height: 24px;
+    }
+
+    img {
+      vertical-align: middle;
+    }
   }
+}
+
+.button.green, .button-group.green {
+  border-color: #388e3e;
+  background: #41a448;
+  color: #fff;
+}
+
+.button.green:hover {
+  background: #3b9541;
+}
+
+.button.blue, .button-group.blue {
+  border-color: #4172a4;
+  background: #4c82b7;
+  color: #fff;
+}
+
+.button.blue:hover {
+  background: #4477aa;
+}
+
+.button.red, .button-group.red {
+  border-color: #8d2525;
+  background: #b43131;
+  color: #fff;
+}
+
+.button.red:hover {
+  background: #a42c2c;
 }

@@ -1,4 +1,16 @@
 Kent::Application.routes.draw do
+  devise_for :users
+
+  resources :feeds do
+    collection do
+      get 'import'
+      post 'import_subscriptions'
+    end
+  end
+
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
+  
   root :to => 'home#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

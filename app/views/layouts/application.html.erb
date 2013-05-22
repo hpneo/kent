@@ -13,24 +13,45 @@
       <a href="/">Kent</a>
     </h1>
     <nav class="float right">
-      <div class="dropdown">
-        <a href="#" class="button green dropdown-toggle">Sign in with...</a>
-        <ul class="dropdown-menu">
-          <li><a href="/auth/twitter">Twitter</a></li>
-          <li><a href="/auth/facebook">Facebook</a></li>
-          <li><a href="/auth/gplus">Google+</a></li>
-        </ul>
-      </div>
-      <a href="#" class="button blue">Subscribe</a>
-      <a href="#" class="button red">Sign out</a>
+      <% if user_signed_in? %>
+        <span>Welcome, <%= current_user.first_name %></span>
+        <a href="#" class="button blue">Subscribe</a>
+        <a href="#" class="button red">Sign out</a>
+      <% else %>
+        <div class="button-group green">
+          <span class="label">Sign in with...</span>
+          <span class="buttons">
+            <a href="/auth/twitter">
+              <img src="/assets/twitter-24x24.png" title="Twitter" />
+            </a>
+            <a href="/auth/facebook">
+              <img src="/assets/facebook-24x24.png" title="Facebook" />
+            </a>
+            <a href="/auth/gplus">
+              <img src="/assets/google+-24x24.png" title="Google+" />
+            </a>
+          </span>
+        </div>
+      <% end %>
     </nav>
   </header>
   <section id="main">
-    <aside id="feeds">
-      <h4>Feeds</h4>
-      <h4>Folders</h4>
-      <h4>Tags</h4>
-    </aside>
+    <% if user_signed_in? %>
+      <aside id="feeds">
+        <h4>Feeds</h4>
+        <ul id="feeds_list">
+          <% current_user.feeds.each do |feed| %>
+            <li style="background: url('https://plus.google.com/_/favicon?domain=<%= feed.home_url %>') no-repeat left 2px;">
+              <a href="<%= feed_path(feed) %>">
+                <%= feed.title %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+        <h4>Folders</h4>
+        <h4>Tags</h4>
+      </aside>
+    <% end %>
     <aside id="reader">
       <%= yield %>
     </aside>
