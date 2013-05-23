@@ -1,4 +1,7 @@
 Kent::Application.routes.draw do
+  resources :posts
+
+
   devise_for :users
 
   resources :feeds do

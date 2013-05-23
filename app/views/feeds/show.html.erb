@@ -1,0 +1,9 @@
+<h1 class="feed-title"><%= @feed.title %></h1>
+<% @feed.posts.each do |post| %>
+  <div class="post">
+    <h2 class="post-title">
+      <a href="<%= post.link %>" target="_blank"><%= post.title %></a>
+    </h2>
+    <div class="post-content"><%= raw post.description %></div>
+  </div>
+<% end %>

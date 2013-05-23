@@ -28,6 +28,22 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.hero {
+  font-size: 1.5em;
+  width: 960px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fcfcfc;
+  border: solid 1px #d0d0d0;
+  box-shadow: 0 0 10px #d0d0d0;
+
+  .subtitle {
+    font-weight: 900;
+    text-transform: lowercase;
+    font-variant: small-caps;
+  }
+}
+
 .button {
   border: solid 1px #e0e0e0;
   padding: 5px 20px;

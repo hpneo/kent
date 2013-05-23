@@ -51,10 +51,24 @@
         <h4>Folders</h4>
         <h4>Tags</h4>
       </aside>
+      <aside id="reader" class="<%= controller.controller_name %>">
+        <%= yield %>
+      </aside>
+    <% else %>
+      <div class="hero">
+        <h1>Read your feeds, the classic way</h1>
+        <h4 class="subtitle">Sign in with...</h4>
+        <a href="/auth/twitter">
+          <img src="/assets/twitter-32x32.png" title="Twitter" />
+        </a>
+        <a href="/auth/facebook">
+          <img src="/assets/facebook-32x32.png" title="Facebook" />
+        </a>
+        <a href="/auth/gplus">
+          <img src="/assets/google+-32x32.png" title="Google+" />
+        </a>
+      </div>
     <% end %>
-    <aside id="reader">
-      <%= yield %>
-    </aside>
   </section>
 </body>
 </html>

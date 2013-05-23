@@ -77,10 +77,15 @@
   float: left;
   width: 900px;
   max-width: 900px;
-  padding: 20px;
   background: #fefefe;
   border: solid 1px #f0f0f0;
   box-shadow: 0 0 10px #efefef;
+
+  &.feeds {
+    background: none;
+    box-shadow: none;
+    border: none;
+  }
 
   h1 {
     font-weight: 700;
@@ -88,5 +93,33 @@
 
   a {
     color: #4477aa;
+  }
+
+  .feed-title {
+    padding: 20px;
+    border-color: #4172a4;
+    background: #4c82b7;
+    color: #fff;
+    border-bottom: solid 5px #2f5378;
+  }
+}
+
+.post {
+  margin-bottom: 20px;
+  border-bottom: solid 1px #eee;
+  background: #fefefe;
+  border: solid 1px #e0e0e0;
+  box-shadow: 0 0 10px #e0e0e0;
+
+  .post-title {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4172a4;
+    border-bottom: solid 2px #4c82b7;
+  }
+
+  .post-content {
+    padding: 0 10px;
   }
 }
