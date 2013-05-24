@@ -15,6 +15,9 @@
     <nav class="float right">
       <% if user_signed_in? %>
         <span>Welcome, <%= current_user.first_name %></span>
+        <% if current_user.feeds.count == 0 %>
+          <small>(New here? Try <a href="/feeds/import">importing</a> your feeds)</small>
+        <% end %>
         <a href="#" class="button blue">Subscribe</a>
         <a href="#" class="button red">Sign out</a>
       <% else %>
@@ -36,39 +39,7 @@
     </nav>
   </header>
   <section id="main">
-    <% if user_signed_in? %>
-      <aside id="feeds">
-        <h4>Feeds</h4>
-        <ul id="feeds_list">
-          <% current_user.feeds.each do |feed| %>
-            <li style="background: url('https://plus.google.com/_/favicon?domain=<%= feed.home_url %>') no-repeat left 2px;">
-              <a href="<%= feed_path(feed) %>">
-                <%= feed.title %>
-              </a>
-            </li>
-          <% end %>
-        </ul>
-        <h4>Folders</h4>
-        <h4>Tags</h4>
-      </aside>
-      <aside id="reader" class="<%= controller.controller_name %>">
-        <%= yield %>
-      </aside>
-    <% else %>
-      <div class="hero">
-        <h1>Read your feeds, the classic way</h1>
-        <h4 class="subtitle">Sign in with...</h4>
-        <a href="/auth/twitter">
-          <img src="/assets/twitter-32x32.png" title="Twitter" />
-        </a>
-        <a href="/auth/facebook">
-          <img src="/assets/facebook-32x32.png" title="Facebook" />
-        </a>
-        <a href="/auth/gplus">
-          <img src="/assets/google+-32x32.png" title="Google+" />
-        </a>
-      </div>
-    <% end %>
+    <%= yield %>
   </section>
 </body>
 </html>

@@ -9,6 +9,7 @@ gem 'mysql2'
 
 group :production do
   gem 'pg'
+  gem 'quiet_assets'
 end
 
 # Gems used only for assets and not required
@@ -24,8 +25,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
-gem 'quiet_assets'
 
 gem 'devise'
 gem 'inherited_resources'

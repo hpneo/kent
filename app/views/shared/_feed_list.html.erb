@@ -1,0 +1,14 @@
+<aside id="feeds">
+  <h4>Feeds</h4>
+  <ul id="feeds_list">
+    <% current_user.feeds.each do |feed| %>
+      <li style="background: url('https://plus.google.com/_/favicon?domain=<%= feed.home_url %>') no-repeat left 2px;">
+        <a href="<%= feed_path(feed) %>">
+          <%= feed.title %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  <!-- <h4>Folders</h4>
+  <h4>Tags</h4> -->
+</aside>

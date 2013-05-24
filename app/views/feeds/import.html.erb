@@ -1,9 +1,12 @@
-<h1>Importing my feeds</h1>
+<div class="single">
+  <h1>Importing my feeds</h1>
+  <small><strong><a href="https://support.google.com/reader/answer/3028851?hl=en">Learn how export your Google Reader data here</a></strong>.</small>
 
-<%= form_tag('/feeds/import_subscriptions', multipart: true, method: 'post') do %>
-  <p>
-    <%= label_tag 'import[subscriptions]', 'Choose an OPML file' %>
-    <%= file_field_tag 'import[subscriptions]' %>
-  </p>
-  <%= submit_tag 'Import', class: 'button green' %>
-<% end %>
+  <%= form_tag('/feeds/import_subscriptions', multipart: true, method: 'post') do %>
+    <p>
+      <%= label_tag 'import[subscriptions]', 'Choose an OPML file' %>
+      <%= file_field_tag 'import[subscriptions]' %>
+    </p>
+    <%= submit_tag 'Import', class: 'button green' %>
+  <% end %>
+</div>

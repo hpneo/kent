@@ -12,7 +12,11 @@ body {
 
 a {
   text-decoration: none;
-  color: #3d3d3d;
+  color: #606060;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,19 +32,54 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.hero {
-  font-size: 1.5em;
+.row {
+  overflow: hidden;
+
+  .column {
+    float: left;
+
+    &.right {
+      float: right;
+    }
+  }
+}
+
+.single {
   width: 960px;
   margin: 20px auto;
-  padding: 20px;
   background: #fcfcfc;
   border: solid 1px #d0d0d0;
   box-shadow: 0 0 10px #d0d0d0;
+  padding: 20px;
+}
+
+.hero {
+  font-size: 1.5em;
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  h3 {
+    font-size: 1em;
+  }
 
   .subtitle {
     font-weight: 900;
     text-transform: lowercase;
     font-variant: small-caps;
+  }
+
+  .hero-content {
+    width: 560px;
+  }
+
+  .hero-image {
+    width: 350px;
   }
 }
 
@@ -54,9 +93,20 @@ h1, h2, h3, h4, h5, h6 {
   font-variant: small-caps;
   font-size: 1.1em;
   background: #efefef;
+  color: #616161;
+
+  &.square {
+    padding: 5px;
+  }
+
+  .icon {
+    width: 24px;
+    padding: 3px;
+  }
 
   &:hover {
     background: #eaeaea;
+    text-decoration: none;
   }
 }
 

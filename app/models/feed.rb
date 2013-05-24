@@ -11,6 +11,49 @@ class Feed < ActiveRecord::Base
   after_create :import_posts
 
   def import_posts
+    existing_guids = self.posts.pluck(:guid)
+
+    imported_posts = []
+
+    xml_items_to_hash.each do |item|
+      unless existing_guids.include?(item[:guid])
+        imported_posts << self.posts.create({
+          title: item[:title],
+          link: item[:link],
+          guid: item[:guid],
+          original_link: item[:origLink],
+          published_at: DateTime.parse(item[:pubDate]),
+          author: item[:creator] || item[:author],
+          description: item[:encoded] || item[:description]
+        })
+      end
+    end
+
+    imported_posts
+  end
+
+  def to_param
+    "#{self.id}-#{self.title.parameterize}"
+  end
+
+  private
+  def fetch(uri_str, limit = 10)
+    raise ArgumentError, 'too many HTTP redirects' if limit == 0
+
+    response = Net::HTTP.get_response(URI.parse(uri_str))
+
+    case response
+    when Net::HTTPSuccess then
+      response
+    when Net::HTTPRedirection then
+      location = response['location']
+      fetch(location, limit - 1)
+    else
+      response.value
+    end
+  end
+
+  def xml_items_to_hash
     feed_content = fetch(self.url).body
     feed = REXML::Document.new(feed_content)
 
@@ -30,37 +73,6 @@ class Feed < ActiveRecord::Base
       items_as_array << item_as_hash
     end
 
-    existing_guids = self.posts.pluck(:guid)
-
-    items_as_array.each do |item|
-      unless existing_guids.include?(item[:guid])
-        self.posts.create({
-          title: item[:title],
-          link: item[:link],
-          guid: item[:guid],
-          original_link: item[:origLink],
-          published_at: DateTime.parse(item[:pubDate]),
-          author: item[:creator],
-          description: item[:encoded] || item[:description]
-        })
-      end
-    end
-  end
-
-  private
-  def fetch(uri_str, limit = 10)
-    raise ArgumentError, 'too many HTTP redirects' if limit == 0
-
-    response = Net::HTTP.get_response(URI.parse(uri_str))
-
-    case response
-    when Net::HTTPSuccess then
-      response
-    when Net::HTTPRedirection then
-      location = response['location']
-      fetch(location, limit - 1)
-    else
-      response.value
-    end
+    items_as_array
   end
 end

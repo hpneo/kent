@@ -1,0 +1,1 @@
+$("#post-<%= @post.id %>").find('.toggle-read').attr('href', '<%= mark_as_read_post_path(@post) %>').text('Mark as read');
