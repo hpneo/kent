@@ -1,4 +1,8 @@
 <%= render 'shared/feed_list' %>
 <aside id="reader" class="<%= controller.controller_name %>">
-  
+  <h1 class="feed-title">Unread posts</h1>
+
+  <% current_user.posts.unread.limit(10).each do |post| %>
+    <%= render 'shared/post', post: post %>
+  <% end %>
 </aside>

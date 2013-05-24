@@ -7,21 +7,6 @@
   </nav>
   <h1 class="feed-title"><%= @feed.title %></h1>
   <% @feed.posts.each do |post| %>
-    <div class="post" id="post-<%= post.id %>">
-      <h2 class="post-title">
-        <a href="<%= post.link %>" target="_blank"><%= post.title %></a>
-        <% unless post.author.blank? %>
-          <small class="post-author">by <%= post.author %></small>
-        <% end %>
-      </h2>
-      <div class="post-content"><%= raw post.description %></div>
-      <nav class="post-options">
-        <% if post.read? %>
-          <a href="<%= mark_as_unread_post_path(post) %>" class="toggle-read" data-remote="true" data-method="post">Mark as unread</a>
-        <% else %>
-          <a href="<%= mark_as_read_post_path(post) %>" class="toggle-read" data-remote="true" data-method="post">Mark as read</a>
-        <% end %>
-      </nav>
-    </div>
+    <%= render 'shared/post', post: post %>
   <% end %>
 </aside>

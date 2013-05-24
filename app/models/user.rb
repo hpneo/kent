@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :provider, :uid
 
   has_many :feeds
+  has_many :posts, through: :feeds
 
   def full_name
     "#{self.first_name} #{self.last_name}"
