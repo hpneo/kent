@@ -1,5 +1,5 @@
 <%= render 'shared/feed_list' %>
-<aside id="reader" class="<%= controller.controller_name %>">
+<aside id="reader" class="<%= controller.controller_name %>" data-feed-id="<%= @feed.id %>">
   <nav class="feed-options">
     <a href="<%= import_posts_feed_path(@feed.id) %>" class="button icon square" data-remote="true" data-method="post"><img src="/assets/icons/refresh.png" class="icon" alt="Refresh" title="Refresh"></a>
     <a href="<%= mark_all_as_read_feed_path(@feed.id) %>" class="button" data-remote="true" data-method="post">Mark all as read</a>
@@ -7,7 +7,7 @@
   </nav>
   <h1 class="feed-title">
     <%= @feed.title %>
-    <small class="label" id="feed-post-counter"><%= @feed.posts.unread.count %></small>
+    <small class="label feed-post-counter"><%= @feed.posts.unread.count %></small>
   </h1>
   <section id="feed-posts-<%= @feed.id %>">
     <% @feed.posts.each do |post| %>

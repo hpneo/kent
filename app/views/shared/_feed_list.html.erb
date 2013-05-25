@@ -2,10 +2,10 @@
   <h4>Feeds</h4>
   <ul id="feeds_list">
     <% current_user.feeds.each do |feed| %>
-      <li style="background: url('https://plus.google.com/_/favicon?domain=<%= feed.home_url %>') no-repeat left 2px;">
-        <a href="<%= feed_path(feed) %>">
-          <%= feed.title %>
-          <small class="label"><%= feed.posts.unread.count %></small>
+      <li style="background: url('https://plus.google.com/_/favicon?domain=<%= feed.home_url %>') no-repeat left 2px;" data-feed-id="<%= feed.id %>">
+        <a href="<%= feed_path(feed) %>" title="<%= feed.title %>">
+          <%= truncate(feed.title, length: 27) %>
+          <small class="label feed-post-counter"><%= feed.posts.unread.count %></small>
         </a>
       </li>
     <% end %>

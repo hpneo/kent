@@ -83,11 +83,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.label {
+small.label {
   font-size: 0.7em;
   background: rgba(10, 10, 10, 0.4);
   padding: 3px 10px;
   color: #fff;
+  border-radius: 2px;
 }
 
 .button {

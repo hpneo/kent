@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require libs/mustache
 //= require libs/moment
+//= require libs/uatu
 //= require feeds

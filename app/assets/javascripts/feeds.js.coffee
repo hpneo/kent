@@ -6,6 +6,9 @@ window.Kent ||= {}
 
 window.Kent.Feed =
   init : ->
+    Uatu.on 'update-posts-counter', (feed_id, counter) ->
+      $("[data-feed-id=#{feed_id}]").find('.feed-post-counter').text(counter)
+    
     $('.post-date').on 'click', ->
       post = $(@).parents('.post')
       post_id = post.attr('id').replace('post-', '')

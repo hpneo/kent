@@ -1,2 +1,2 @@
 $("#post-<%= @post.id %>").find('.toggle-read').attr('href', '<%= mark_as_read_post_path(@post) %>').text('Mark as read');
-$('#feed-post-counter').text('<%= @unread_posts_counter %>');
+Uatu.fire('update-posts-counter', window, <%= @post.feed_id %>, <%= @unread_posts_counter %>);
