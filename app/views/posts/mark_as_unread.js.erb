@@ -1,1 +1,2 @@
 $("#post-<%= @post.id %>").find('.toggle-read').attr('href', '<%= mark_as_read_post_path(@post) %>').text('Mark as read');
+$('#feed-post-counter').text('<%= @unread_posts_counter %>');

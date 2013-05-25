@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require libs/mustache
+//= require libs/moment
+//= require feeds

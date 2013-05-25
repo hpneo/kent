@@ -40,37 +40,43 @@ class Feed < ActiveRecord::Base
   def fetch(uri_str, limit = 10)
     raise ArgumentError, 'too many HTTP redirects' if limit == 0
 
-    response = Net::HTTP.get_response(URI.parse(uri_str))
+    begin
+      response = Net::HTTP.get_response(URI.parse(uri_str))
 
-    case response
-    when Net::HTTPSuccess then
-      response
-    when Net::HTTPRedirection then
-      location = response['location']
-      fetch(location, limit - 1)
-    else
-      response.value
+      case response
+      when Net::HTTPSuccess then
+        response
+      when Net::HTTPRedirection then
+        location = response['location']
+        fetch(location, limit - 1)
+      when Net::HTTPNotFound then
+        nil
+      else
+        response.value
+      end
+    rescue Exception => e
+      nil
     end
   end
 
   def xml_items_to_hash
-    feed_content = fetch(self.url).body
-    feed = REXML::Document.new(feed_content)
-
-    channel = feed.root.elements.to_a('//channel').first
-
-    items = channel.elements.to_a('//item')
-
     items_as_array = []
+    if feed_content = fetch(self.url)
+      feed = REXML::Document.new(feed_content.body)
 
-    items.each do |item|
-      item_as_hash = {}
+      channel = feed.root.elements.to_a('//channel').first
 
-      item.elements.each do |item_element|
-        item_as_hash[item_element.name.to_sym] = item_element.text
+      items = channel.elements.to_a('//item')
+
+      items.each do |item|
+        item_as_hash = {}
+
+        item.elements.each do |item_element|
+          item_as_hash[item_element.name.to_sym] = item_element.text
+        end
+
+        items_as_array << item_as_hash
       end
-
-      items_as_array << item_as_hash
     end
 
     items_as_array

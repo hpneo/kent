@@ -1,12 +1,12 @@
 <div class="post" id="post-<%= post.id %>">
   <h2 class="post-title">
-    <small class="post-date"><%= post.published_at %></small>
+    <small class="post-date"><%= post.published_at.strftime('%Y-%m-%d %H:%M') %> (<%= distance_of_time_in_words_to_now(post.published_at) %> ago)</small>
     <a href="<%= post.link %>" target="_blank"><%= post.title %></a>
     <% unless post.author.blank? %>
       <small class="post-author">by <%= post.author %></small>
     <% end %>
   </h2>
-  <div class="post-content"><%= raw post.description %></div>
+  <div class="post-content collapsed"><%= raw post.description %></div>
   <nav class="post-options">
     <% if post.read? %>
       <a href="<%= mark_as_unread_post_path(post) %>" class="toggle-read" data-remote="true" data-method="post">Mark as unread</a>

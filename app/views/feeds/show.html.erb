@@ -5,8 +5,16 @@
     <a href="<%= mark_all_as_read_feed_path(@feed.id) %>" class="button" data-remote="true" data-method="post">Mark all as read</a>
     <a href="<%= feed_path(@feed.id) %>" class="button red" data-method="delete">Delete</a>
   </nav>
-  <h1 class="feed-title"><%= @feed.title %></h1>
-  <% @feed.posts.each do |post| %>
-    <%= render 'shared/post', post: post %>
-  <% end %>
+  <h1 class="feed-title">
+    <%= @feed.title %>
+    <small class="label" id="feed-post-counter"><%= @feed.posts.unread.count %></small>
+  </h1>
+  <section id="feed-posts-<%= @feed.id %>">
+    <% @feed.posts.each do |post| %>
+      <%= render 'shared/post', post: post %>
+    <% end %>
+  </section>
 </aside>
+<script type="text/javascript">
+  window.Kent.Feed.init()
+</script>

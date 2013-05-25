@@ -1,0 +1,11 @@
+<div class="post" id="post-{{ id }}">
+  <h2 class="post-title">
+    <small class="post-date">{{ published_at }} ({{ published_at_ago }})</small>
+    <a href="{{{ link }}}" target="_blank">{{ title }}</a>
+    <small class="post-author">by {{ author }}</small>
+  </h2>
+  <div class="post-content collapsed">{{{ description }}}</div>
+  <nav class="post-options">
+    <a href="{{ toggle_read_path }}" class="toggle-read" data-remote="true" data-method="post">{{ toggle_read_text }}</a>
+  </nav>
+</div>

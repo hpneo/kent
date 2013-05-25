@@ -19,7 +19,7 @@
           <small>(New here? Try <a href="/feeds/import">importing</a> your feeds)</small>
         <% end %>
         <a href="#" class="button blue">Subscribe</a>
-        <a href="#" class="button red">Sign out</a>
+        <a href="<%= destroy_user_session_path %>" class="button red">Sign out</a>
       <% else %>
         <div class="button-group green">
           <span class="label">Sign in with...</span>
@@ -41,5 +41,8 @@
   <section id="main">
     <%= yield %>
   </section>
+  <script type="text/html" id="template-post">
+    <%= render 'templates/post' %>
+  </script>
 </body>
 </html>

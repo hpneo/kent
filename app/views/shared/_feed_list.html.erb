@@ -5,6 +5,7 @@
       <li style="background: url('https://plus.google.com/_/favicon?domain=<%= feed.home_url %>') no-repeat left 2px;">
         <a href="<%= feed_path(feed) %>">
           <%= feed.title %>
+          <small class="label"><%= feed.posts.unread.count %></small>
         </a>
       </li>
     <% end %>
