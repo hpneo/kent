@@ -2,7 +2,7 @@ require "rexml/document"
 
 class FeedsController < InheritedResources::Base
   before_filter :authenticate_user!
-  before_filter :check_ownership!, :except => [:refresh, :import]
+  before_filter :check_ownership!, :except => [:refresh, :import, :import_subscriptions]
 
   respond_to :json, :xml, :html, :js
 
