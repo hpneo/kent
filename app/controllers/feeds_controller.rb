@@ -7,9 +7,11 @@ class FeedsController < InheritedResources::Base
   respond_to :json, :xml, :html, :js
 
   def mark_all_as_read
+    @feed_id = params[:id].to_i
     @posts = Post.where(feed_id: params[:id]).unread
 
     @posts.each(&:mark_as_read)
+    @unread_posts_counter = Post.unread.where(feed_id: @feed_id).count
   end
 
   def import
