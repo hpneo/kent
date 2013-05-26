@@ -36,10 +36,11 @@ window.Kent.Feed =
       post = $(@).parents('.post')
       post_id = post.attr('id').replace('post-', '')
 
-      $.ajax
-        dataType : 'script'
-        type : 'POST'
-        url : "/posts/#{post_id}/mark_as_read"
+      unless post.find('.post-content').hasClass('collapsed')
+        $.ajax
+          dataType : 'script'
+          type : 'POST'
+          url : "/posts/#{post_id}/mark_as_read"
 
       post.find('.post-content').toggleClass('collapsed')
 
