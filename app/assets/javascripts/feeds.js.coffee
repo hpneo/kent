@@ -6,9 +6,11 @@ window.Kent ||= {}
 
 window.Kent.Feed =
   init : ->
-    Uatu.on 'update-posts-counter', (feed_id, counter) ->
-      $("[data-feed-id=#{feed_id}]").find('.feed-post-counter').text(counter)
-    
+    $('#refresh-feeds').on 'click', (e) =>
+      e.preventDefault()
+
+      @refreshAll()
+
     $('.post-date').on 'click', ->
       post = $(@).parents('.post')
       post_id = post.attr('id').replace('post-', '')
@@ -19,9 +21,37 @@ window.Kent.Feed =
         url : "/posts/#{post_id}/mark_as_read"
 
       post.find('.post-content').toggleClass('collapsed')
+
+    @initPostsCounterUpdater()
+
+  refreshAll : ->
+    console.log 'refreshAll'
+    for feed_id in @feedIdsFromList()
+      @refreshFeed(feed_id)
+  
+  refreshFeed : (feed_id) ->
+    console.log 'refreshFeed', feed_id
+    $('#refresh-feeds').find('img').addClass('spin')
+
+    $.ajax
+      dataType : 'script'
+      type : 'POST'
+      url : "/feeds/#{feed_id}/import_posts"
+      complete : ->
+        $('#refresh-feeds').find('img').removeClass('spin')
+
+  feedIdsFromList : ->
+    $('#feeds_list').find('.feed-item').map((index, item) ->
+      $(item).data('feed-id')
+    ).toArray()
+
+  initPostsCounterUpdater : ->
+    Uatu.on 'update-posts-counter', (feed_id, counter) ->
+      $("[data-feed-id=#{feed_id}]").find('.feed-post-counter').text(counter)
+
   appendPosts : (posts) ->
     if posts.length == 0
-      alert 'No posts found'
+      console.log 'No posts found'
     else
       template = $('#template-post').text()
 

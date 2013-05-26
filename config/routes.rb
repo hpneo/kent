@@ -15,6 +15,7 @@ Kent::Application.routes.draw do
     collection do
       get 'import'
       post 'import_subscriptions'
+      post 'refresh'
     end
 
     member do

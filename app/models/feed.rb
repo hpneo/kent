@@ -17,15 +17,20 @@ class Feed < ActiveRecord::Base
 
     xml_items_to_hash.each do |item|
       unless existing_guids.include?(item[:guid])
-        imported_posts << self.posts.create({
+        post_hash = {
           title: item[:title],
           link: item[:link],
           guid: item[:guid],
           original_link: item[:origLink],
-          published_at: DateTime.parse(item[:pubDate]),
           author: item[:creator] || item[:author],
           description: item[:encoded] || item[:description]
-        })
+        }
+
+        if item[:pubDate]
+          post_hash[:published_at] = DateTime.parse(item[:pubDate])
+        end
+
+        imported_posts << self.posts.create(post_hash)
       end
     end
 
@@ -61,21 +66,25 @@ class Feed < ActiveRecord::Base
 
   def xml_items_to_hash
     items_as_array = []
+
     if feed_content = fetch(self.url)
-      feed = REXML::Document.new(feed_content.body)
+      begin
+        feed = REXML::Document.new(feed_content.body)
 
-      channel = feed.root.elements.to_a('//channel').first
+        channel = feed.root.elements.to_a('//channel').first
 
-      items = channel.elements.to_a('//item')
+        items = channel.elements.to_a('//item')
 
-      items.each do |item|
-        item_as_hash = {}
+        items.each do |item|
+          item_as_hash = {}
 
-        item.elements.each do |item_element|
-          item_as_hash[item_element.name.to_sym] = item_element.text
+          item.elements.each do |item_element|
+            item_as_hash[item_element.name.to_sym] = item_element.text
+          end
+
+          items_as_array << item_as_hash
         end
-
-        items_as_array << item_as_hash
+      rescue Exception => e
       end
     end
 

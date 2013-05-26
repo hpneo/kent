@@ -2,7 +2,7 @@ require "rexml/document"
 
 class FeedsController < InheritedResources::Base
   before_filter :authenticate_user!
-  before_filter :check_ownership!
+  before_filter :check_ownership!, :except => [:refresh, :import]
 
   respond_to :json, :xml, :html, :js
 
@@ -15,9 +15,17 @@ class FeedsController < InheritedResources::Base
   def import
   end
 
+  def refresh
+    @feed_post_counters = {}
+    current_user.feeds.each do |feed|
+      @feed_post_counters[feed.id] = Post.unread.where(feed_id: feed.id).count
+    end
+  end
+
   def import_posts
     @feed = Feed.find(params[:id])
     @imported_posts = @feed.import_posts
+    @unread_posts_counter = Post.unread.where(feed_id: @feed.id).count
   end
 
   def import_subscriptions

@@ -68,6 +68,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1em;
   }
 
+  p {
+    font-size: 0.8em;
+  }
+
   .subtitle {
     font-weight: 900;
     text-transform: lowercase;
@@ -81,6 +85,10 @@ h1, h2, h3, h4, h5, h6 {
   .hero-image {
     width: 350px;
   }
+
+  .button-group {
+    margin: 100px 0;
+  }
 }
 
 small.label {
@@ -89,6 +97,19 @@ small.label {
   padding: 3px 10px;
   color: #fff;
   border-radius: 2px;
+}
+
+.inline-action {
+  display: inline-block;
+
+  &.right {
+    float: right;
+    margin-right: 20px;
+  }
+
+  img {
+    display: block;
+  }
 }
 
 .button {

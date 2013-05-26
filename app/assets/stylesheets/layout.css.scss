@@ -46,13 +46,18 @@
 
 #feeds {
   float: left;
-  width: 300px;
-  margin: 10px 0;
+  width: 280px;
+  margin: 10px 20px 10px 0;
 
   h4 {
     color: #3f3f3f;
     font-weight: 800;
     text-transform: uppercase;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   ul {

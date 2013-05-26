@@ -1,0 +1,3 @@
+<% @feed_post_counters.each do |feed_id, post_counter| %>
+Uatu.fire('update-posts-counter', window, <%= feed_id %>, <%= post_counter %>);
+<% end%>

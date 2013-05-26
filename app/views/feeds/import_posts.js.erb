@@ -1,1 +1,2 @@
 Kent.Feed.appendPosts(<%= raw @imported_posts.to_json %>);
+Uatu.fire('update-posts-counter', window, <%= @feed.id %>, <%= @unread_posts_counter %>);
