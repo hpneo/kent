@@ -6,7 +6,7 @@ class Feed < ActiveRecord::Base
   attr_accessible :user_id, :title, :description, :url, :home_url, :format
 
   belongs_to :user
-  has_many :posts
+  has_many :posts, order: 'published_at DESC, id DESC'
 
   after_create :import_posts
 
