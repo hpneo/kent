@@ -7,12 +7,12 @@
         Undated
       <% end %>
     </small>
-    <a href="<%= post.link %>" target="_blank"><%= post.title %></a>
+    <a href="<%= post.link %>" class="post-link" target="_blank"><%= post.title %></a>
     <% unless post.author.blank? %>
       <small class="post-author">by <%= post.author %></small>
     <% end %>
   </h2>
-  <div class="post-content collapsed"><%= raw post.description %></div>
+  <div class="post-content"><%= raw post.description %></div>
   <nav class="post-options">
     <% if post.read? %>
       <a href="<%= mark_as_unread_post_path(post) %>" class="toggle-read" data-remote="true" data-method="post">Mark as unread</a>

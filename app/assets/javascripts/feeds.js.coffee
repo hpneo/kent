@@ -22,6 +22,16 @@ window.Kent.Feed =
 
       @refreshAll()
 
+    $('.post-link').on 'click', ->
+      post = $(@).parents('.post')
+      post_id = post.attr('id').replace('post-', '')
+
+      $.ajax
+        dataType : 'script'
+        type : 'POST'
+        url : "/posts/#{post_id}/mark_as_read"
+      
+
     $('.post-date').on 'click', ->
       post = $(@).parents('.post')
       post_id = post.attr('id').replace('post-', '')
