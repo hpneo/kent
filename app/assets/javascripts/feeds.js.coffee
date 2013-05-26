@@ -6,6 +6,17 @@ window.Kent ||= {}
 
 window.Kent.Feed =
   init : ->
+    $('#refresh-feed').on 'click', (e) =>
+      e.preventDefault()
+
+      refresSpinner = $('#refresh-feed').find('img')
+      refresSpinner.addClass('spin')
+      feed_id = $('#refresh-feed').parents('.feed').data('feed-id')
+
+      xhr = @refreshFeed(feed_id)
+      xhr.done ->
+        refresSpinner.removeClass('spin')
+
     $('#refresh-feeds').on 'click', (e) =>
       e.preventDefault()
 
@@ -25,20 +36,23 @@ window.Kent.Feed =
     @initPostsCounterUpdater()
 
   refreshAll : ->
-    console.log 'refreshAll'
     for feed_id in @feedIdsFromList()
       @refreshFeed(feed_id)
   
   refreshFeed : (feed_id) ->
-    console.log 'refreshFeed', feed_id
-    $('#refresh-feeds').find('img').addClass('spin')
+    if $('#refresh-feed').length > 0
+      refresSpinner = $('#refresh-feed').find('img')
+    else
+      refresSpinner = $('#refresh-feeds').find('img')
+
+    refresSpinner.addClass('spin')
 
     $.ajax
       dataType : 'script'
       type : 'POST'
       url : "/feeds/#{feed_id}/import_posts"
       complete : ->
-        $('#refresh-feeds').find('img').removeClass('spin')
+        refresSpinner.removeClass('spin')
 
   feedIdsFromList : ->
     $('#feeds_list').find('.feed-item').map((index, item) ->
