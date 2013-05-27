@@ -30,7 +30,6 @@ window.Kent.Feed =
         dataType : 'script'
         type : 'POST'
         url : "/posts/#{post_id}/mark_as_read"
-      
 
     $('.post-date').on 'click', ->
       post = $(@).parents('.post')
@@ -45,6 +44,9 @@ window.Kent.Feed =
       post.find('.post-content').toggleClass('collapsed')
 
     @initPostsCounterUpdater()
+
+    if window.history.length <= 3 and "#{window.location.protocol}//#{window.location.host}" is window.location.origin
+      @refreshAll()
 
   refreshAll : ->
     for feed_id in @feedIdsFromList()
