@@ -45,9 +45,6 @@ window.Kent.Feed =
 
     @initPostsCounterUpdater()
 
-    if window.history.length <= 3 and "#{window.location.protocol}//#{window.location.host}" is window.location.origin
-      @refreshAll()
-
   refreshAll : ->
     for feed_id in @feedIdsFromList()
       @refreshFeed(feed_id)
