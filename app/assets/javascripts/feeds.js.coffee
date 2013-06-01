@@ -44,6 +44,7 @@ window.Kent.Feed =
       post.find('.post-content').toggleClass('collapsed')
 
     @initPostsCounterUpdater()
+    @proxyImages($('#reader'))
 
   refreshAll : ->
     for feed_id in @feedIdsFromList()
@@ -71,7 +72,19 @@ window.Kent.Feed =
 
   initPostsCounterUpdater : ->
     Uatu.on 'update-posts-counter', (feed_id, counter) ->
-      $("[data-feed-id=#{feed_id}]").find('.feed-post-counter').text(counter)
+      post_counter = $("[data-feed-id=#{feed_id}]").find('.feed-post-counter')
+      post_counter.text(counter)
+
+      if counter == 0
+        post_counter.addClass('hidden')
+      else
+        post_counter.removeClass('hidden')
+
+  proxyImages : (container) ->
+    container.find('.post-content img').each (index, item) ->
+      new_src = $(item).attr('src').replace('http://', 'http://images.weserv.nl/?url=')
+
+      $(item).attr('src', new_src)
 
   appendPosts : (posts) ->
     if posts.length == 0
@@ -94,3 +107,8 @@ window.Kent.Feed =
         content = Mustache.render(template, post)
 
         $("#feed-posts-#{post.feed_id}").prepend content
+
+      $("#feed-posts-#{post.feed_id}").find('.post-content img').each (index, item) ->
+        new_src = $(item).attr('src').replace('http://', 'http://images.weserv.nl/?url=')
+
+        $(item).attr('src', new_src)

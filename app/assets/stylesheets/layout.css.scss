@@ -77,6 +77,12 @@
       margin: 5px 0;
       padding-left: 24px;
     }
+
+    .feed-post-counter {
+      &.hidden {
+        display: none;
+      }
+    }
   }
 }
 

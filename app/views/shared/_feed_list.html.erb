@@ -8,7 +8,12 @@
       <li class="feed-item" style="background: url('https://plus.google.com/_/favicon?domain=<%= feed.home_url %>') no-repeat left 2px;" data-feed-id="<%= feed.id %>">
         <a href="<%= feed_path(feed) %>" title="<%= feed.title %>">
           <%= truncate(feed.title, length: 20) %>
-          <small class="label feed-post-counter"><%= feed.posts.unread.count %></small>
+          <% if feed.posts.unread.count == 0 %>
+            <% counter_class = "hidden" %>
+          <% else %>
+            <% counter_class = "" %>
+          <% end %>
+          <small class="label feed-post-counter <%= counter_class %>"><%= feed.posts.unread.count %></small>
         </a>
       </li>
     <% end %>
