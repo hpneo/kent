@@ -1,5 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :gplus, '675569114873.apps.googleusercontent.com', 'CrPACCX1RROpfVtYkZt50Cxb', scope: 'userinfo.email, userinfo.profile'
+  provider :gplus, '675569114873.apps.googleusercontent.com', 'CrPACCX1RROpfVtYkZt50Cxb', scope: 'email, profile'
   provider :facebook, '517445554981885', '5ccd97524bb376692e3aad9f6e4b7c74', scope: 'email'
 
   if Rails.env.development?
