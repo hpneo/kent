@@ -3,11 +3,15 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(omniauth_hash)
     sign_in(:user, user)
 
-    redirect_to root_path
+    if mobile_device?
+      render json: user.to_json
+    else
+      redirect_to root_path
+    end
   end
 
   def failure
-    render :json => params.to_json
+    render json: params.to_json
   end
 
   def omniauth_hash
