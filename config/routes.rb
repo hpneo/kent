@@ -1,4 +1,10 @@
 Kent::Application.routes.draw do
+  resources :users do
+    collection do
+      get 'token'
+    end
+  end
+  
   devise_for :users do
     get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
     get 'sign_out' => "devise/sessions#destroy", :as => :destroy_user_session

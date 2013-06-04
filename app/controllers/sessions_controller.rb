@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     sign_in(:user, user)
 
     if mobile_device?
-      render json: user.to_json
+      redirect_to token_users_path(user_token: user.id, provider: params[:provider])
     else
       redirect_to root_path
     end
