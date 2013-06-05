@@ -2,9 +2,14 @@ require "rexml/document"
 
 class FeedsController < InheritedResources::Base
   before_filter :authenticate_user!
-  before_filter :check_ownership!, :only => [:create, :update, :destroy, :mark_all_as_read, :import_posts]
+  before_filter :check_ownership!, :only => [:create, :show, :update, :destroy, :mark_all_as_read, :import_posts]
 
   respond_to :json, :xml, :html, :js
+
+  def index
+    @feeds = current_user.feeds
+    index!
+  end
 
   def mark_all_as_read
     @feed_id = params[:id].to_i
