@@ -3,7 +3,9 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(omniauth_hash)
 
     if mobile_device?
-      redirect_to token_users_path(user_token: user.id, provider: params[:provider])
+      user.reset_authentication_token!
+      
+      redirect_to token_users_path(user_token: user.authentication_token, provider: params[:provider])
     else
       sign_in(:user, user)
       redirect_to root_path
