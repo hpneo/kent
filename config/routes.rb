@@ -27,6 +27,8 @@ Kent::Application.routes.draw do
     member do
       post 'import_posts'
       post 'mark_all_as_read'
+
+      get 'posts'
     end
   end
 
