@@ -37,8 +37,23 @@ class Feed < ActiveRecord::Base
     imported_posts
   end
 
+  def posts_counter
+    self.posts.unread.count
+  end
+
   def to_param
     "#{self.id}-#{self.title.parameterize}"
+  end
+
+  def as_json(options = {})
+    options ||= {}
+    
+    options[:methods]||= []
+    options[:methods] << :posts_counter
+    
+    options[:except]||= []
+    options[:except] += [:created_at, :updated_at, :description]
+    super(options)
   end
 
   private
