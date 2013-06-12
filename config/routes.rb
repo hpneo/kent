@@ -15,6 +15,10 @@ Kent::Application.routes.draw do
       post 'mark_as_read'
       post 'mark_as_unread'
     end
+
+    collection do
+      post 'mark_all_as_read'
+    end
   end
 
   resources :feeds do
