@@ -50,7 +50,7 @@ class FeedsController < InheritedResources::Base
       format.js
       format.html
       format.json {
-        render json: current_user.feeds
+        render json: [@feed]
       }
     end
   end
