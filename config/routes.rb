@@ -26,6 +26,7 @@ Kent::Application.routes.draw do
       get 'import'
       post 'import_subscriptions'
       post 'refresh'
+      post 'import_posts' => :import_all_posts
     end
 
     member do

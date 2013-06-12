@@ -36,6 +36,12 @@ class FeedsController < InheritedResources::Base
     end
   end
 
+  def import_all_posts
+    @feeds = current_user.feeds.each(&:import_posts)
+
+    render json: @feeds
+  end
+
   def import_posts
     @imported_posts = @feed.import_posts
     @unread_posts_counter = Post.unread.where(feed_id: @feed.id).count
