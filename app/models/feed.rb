@@ -52,7 +52,7 @@ class Feed < ActiveRecord::Base
     options[:methods] << :posts_counter
     
     options[:except]||= []
-    options[:except] += [:created_at, :updated_at, :description]
+    options[:except] += [:created_at, :updated_at, :description, :format]
     super(options)
   end
 
